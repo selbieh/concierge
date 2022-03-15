@@ -22,8 +22,9 @@ from concierges.views import custom_confirm
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
+    path('account/confirm-email/<str:key>/', custom_confirm),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    url(r'^account/', include('allauth.urls')),
+    #url(r'^account/', include('allauth.urls')),
+    # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
 
 ]
