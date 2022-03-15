@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     #packages
     'phonenumber_field',
     'rest_framework',
-
     'rest_framework.authtoken',
     'dj_rest_auth',
     'allauth',
@@ -143,20 +142,14 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL='users.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'khaledabdelfattah321@gmail.com'
-EMAIL_HOST_PASSWORD = 'oaiqgiwynhjvwugp'
+EMAIL_PORT = 587#465
+EMAIL_HOST_USER = 'apikey'
+DEFAULT_FROM_EMAIL='selbieh@gmail.com'
+EMAIL_HOST_PASSWORD = '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'
+SENDGRID_API_KEY='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'
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-    ...
-]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -165,11 +158,9 @@ REST_FRAMEWORK = {
 }
 
 
-# REST_AUTH_SERIALIZERS={
-#     'REST_AUTH_REGISTER_SERIALIZERS':'users.serializers.CustomRegisterSerializer'
-# }
 REST_AUTH_REGISTER_SERIALIZERS= {"REGISTER_SERIALIZER":'users.serializers.CustomRegisterSerializer'}
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_CONFIRMATION_EXPIRE_DAYS=1

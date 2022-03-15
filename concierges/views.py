@@ -13,7 +13,7 @@ def custom_confirm(request, key):
         max_age = 60 * 60 * 24 * app_settings.EMAIL_CONFIRMATION_EXPIRE_DAYS
         pk = signing.loads(key, max_age=max_age, salt=app_settings.SALT)
         user = get_object_or_404(id=pk)
-        user.is_active = True
+        user.mail_confirmed = True
         user.save()
         msg = 'mail confirmed'
     else:

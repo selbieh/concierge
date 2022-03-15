@@ -22,12 +22,13 @@ class User(AbstractUser):
     invitation_Code=models.ForeignKey('customers.InvitationCode',null=True,blank=True,on_delete=models.PROTECT)
     customer=models.ForeignKey('customers.Customer',null=True,blank=True,on_delete=models.PROTECT)
     is_active = models.BooleanField(
-        default=False,
+        default=True,
         help_text=(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
         ),
     )
+    mail_confirmed=models.BooleanField(default=False)
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
