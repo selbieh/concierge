@@ -47,6 +47,10 @@ class CustomRegisterSerializer(RegisterSerializer):
         user = User(**cleaned_data)
         user.set_password(password)
         user.save()
+        invitation_code=user.invitation_code
+        invitation_code.used=True
+        invitation_code.save()
+        user.save()
         self.custom_signup(request, user)
         setup_user_email(request, user, [])
         return user
