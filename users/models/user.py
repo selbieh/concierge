@@ -15,11 +15,11 @@ class User(AbstractUser):
 
     )
     email = models.EmailField(blank=False,null=False,unique=True)
-    mobile=PhoneNumberField(blank=False,null=False)
+    mobile=PhoneNumberField(blank=False,null=False,unique=True)
     full_name=models.CharField(max_length=55,blank=False,null=False)
     dob=models.DateField(blank=True,null=True)
     avatar=models.FileField(upload_to=upload_avatar,blank=True,null=True)
-    invitation_Code=models.ForeignKey('customers.InvitationCode',null=True,blank=True,on_delete=models.PROTECT)
+    invitation_code=models.ForeignKey('customers.InvitationCode',null=True,blank=True,on_delete=models.PROTECT)
     customer=models.ForeignKey('customers.Customer',null=True,blank=True,on_delete=models.PROTECT)
     is_active = models.BooleanField(
         default=True,
