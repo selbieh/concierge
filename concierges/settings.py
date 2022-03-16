@@ -55,8 +55,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     #installed app
     'users',
-    'customers'
-
+    'customers',
+    'services'
 ]
 
 MIDDLEWARE = [
@@ -141,11 +141,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 AUTH_USER_MODEL='users.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_USE_TLS = True
@@ -159,7 +164,9 @@ SENDGRID_API_KEY=env('SENDGRID_API_KEY')
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    'PAGE_SIZE': 10
 }
 
 
