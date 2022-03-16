@@ -3,19 +3,33 @@ from allauth.account import app_settings
 from django.core import signing
 from django.http import HttpResponse
 from django.urls import reverse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
+
+from users.forms import ResetPasswordForm
 from users.models import User
 
 
 def custom_confirm(request, key):
+
     response = requests.post(request.build_absolute_uri(reverse('rest_verify_email')), data={"key": key})
     if response.status_code == 200:
-        max_age = 60 * 60 * 24 * app_settings.EMAIL_CONFIRMATION_EXPIRE_DAYS
-        pk = signing.loads(key, max_age=max_age, salt=app_settings.SALT)
-        user = get_object_or_404(id=pk)
-        user.mail_confirmed = True
-        user.save()
         msg = 'mail confirmed'
     else:
         msg = 'link not found'
     return HttpResponse(msg)
+
+
+
+
+def custom_reset_handler(request,uid,token):
+    return render(request,'rest_password_form.html',context={"uid":uid,"token":token})
+
+def custom_reset_handler_submit(request):
+    print(request.POST)
+    form=ResetPasswordForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return HttpResponse('password changed')
+    else:
+        errors=form.errors
+        return render(request, 'rest_password_form.html', context={"errors":errors,"uid": request.POST['uid'], "token": request.POST['token']})

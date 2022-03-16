@@ -28,7 +28,7 @@ class User(AbstractUser):
             'Unselect this instead of deleting accounts.'
         ),
     )
-    mail_confirmed=models.BooleanField(default=False)
+    #mail_confirmed=models.BooleanField(default=False)
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'

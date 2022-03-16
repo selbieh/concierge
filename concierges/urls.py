@@ -17,12 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from concierges.views import custom_confirm
+from concierges.views import custom_confirm, custom_reset_handler, custom_reset_handler_submit
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('account/confirm-email/<str:key>/', custom_confirm),
+    path('dj-rest-auth/reset/confirm/<str:uid>/<str:token>/', custom_reset_handler,name='password_reset_confirm'),
+    path('dj-rest-auth/custom_reset_handler_submit/', custom_reset_handler_submit,name='custom_reset_handler_submit'),
+    path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     #url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
