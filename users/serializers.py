@@ -8,6 +8,7 @@ from rest_framework import serializers
 from customers.models import InvitationCode
 from django.core.exceptions import ValidationError as DjangoValidationError
 
+from customers.serializers import CustomerSerializer
 from users.models import User
 
 
@@ -54,3 +55,20 @@ class CustomRegisterSerializer(RegisterSerializer):
         self.custom_signup(request, user)
         setup_user_email(request, user, [])
         return user
+
+
+class ReadUserDataSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    mobile = PhoneNumberField()
+    dob = serializers.DateField()
+    avatar = serializers.FileField()
+    full_name = serializers.CharField()
+    email = serializers.EmailField()
+    invitation_code = serializers.CharField(source="invitation_code.code")
+    customer = CustomerSerializer(many=False)
+
+
+class UpdateUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['avatar', 'full_name', 'dob']

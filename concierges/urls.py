@@ -23,19 +23,18 @@ from rest_framework_swagger.views import get_swagger_view
 
 schema_view = get_swagger_view(title='Pastebin API')
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/reset/confirm/<str:uid>/<str:token>/', custom_reset_handler,name='password_reset_confirm'),
-    path('dj-rest-auth/custom_reset_handler_submit/', custom_reset_handler_submit,name='custom_reset_handler_submit'),
+    path('dj-rest-auth/reset/confirm/<str:uid>/<str:token>/', custom_reset_handler, name='password_reset_confirm'),
+    path('dj-rest-auth/custom_reset_handler_submit/', custom_reset_handler_submit, name='custom_reset_handler_submit'),
     path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('user/', include("users.urls")),
     path('customers/', include('customers.urls')),
     path('services/', include('services.urls')),
     path('docs/', schema_view)
-    #url(r'^account/', include('allauth.urls')),
+    # url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
 
 ]
