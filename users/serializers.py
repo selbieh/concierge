@@ -71,4 +71,4 @@ class ReadUserDataSerializer(serializers.Serializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['avatar', 'full_name', 'dob']
+        fields = ['mobile', 'avatar', 'full_name', 'dob']
