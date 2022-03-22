@@ -138,24 +138,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 AUTH_USER_MODEL = 'users.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587#465
-# EMAIL_HOST_USER = 'apikey'
-# DEFAULT_FROM_EMAIL=env('DEFAULT_FROM_EMAIL')
-# EMAIL_HOST_PASSWORD =env('EMAIL_HOST_PASSWORD')
-# SENDGRID_API_KEY=env('SENDGRID_API_KEY')
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587#465
+EMAIL_HOST_USER = 'apikey'
+DEFAULT_FROM_EMAIL=env('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_PASSWORD =env('EMAIL_HOST_PASSWORD')
+SENDGRID_API_KEY=env('SENDGRID_API_KEY')
 
 
 REST_FRAMEWORK = {
