@@ -32,3 +32,8 @@ class HomePromotion(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False)
     image = models.ImageField(upload_to=upload_promotion_image, null=True)
     route = models.CharField(max_length=200, null=False, blank=False)
+
+
+class Prerequisite(models.Model):
+    name=models.CharField(max_length=300, null=False, blank=False)
+    service=models.ForeignKey('services.Service',null=False,blank=False,on_delete=models.CASCADE,related_name='prerequisites')

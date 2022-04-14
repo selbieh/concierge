@@ -1,9 +1,16 @@
 from rest_framework import serializers
 
-from services.models import Service, HomeBanner, HomePromotion
+from .models import Service, HomeBanner, HomePromotion, Prerequisite
 
+
+class PrerequisiteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Prerequisite
+        fields = "__all__"
 
 class ListServicesSerializer(serializers.ModelSerializer):
+    prerequisites=PrerequisiteSerializer(many=True)
     class Meta:
         model = Service
         fields = "__all__"

@@ -51,10 +51,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'rest_framework_swagger',
+    'modeltranslation',
     # installed app
     'users',
     'customers',
-    'services'
+    'services',
+    'reservation'
+
 ]
 
 MIDDLEWARE = [
@@ -123,6 +126,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+
+
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('ar', gettext('Arabic')),
+    ('en', gettext('English')),
+)
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+
+MODELTRANSLATION_LANGUAGES = ('en', 'ar')
+
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('en', 'ar')
+
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'services.translation',
+)
 
 LANGUAGE_CODE = 'en-us'
 

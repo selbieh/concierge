@@ -1,6 +1,6 @@
 from django.urls import path
 
-from services.views import ListServicesAPI, ListHomeBannerAPI, ListHomePromotionsAPI
+from .views import ListServicesAPI, ListHomeBannerAPI, ListHomePromotionsAPI
 
 app_name = "services"
 

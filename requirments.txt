@@ -11,6 +11,7 @@ Django==3.2
 django-allauth==0.49.0
 django-environ==0.8.1
 django-filter==21.1
+django-modeltranslation==0.17.5
 django-phonenumber-field==6.1.0
 django-rest-auth==0.9.3
 django-rest-swagger==2.2.0

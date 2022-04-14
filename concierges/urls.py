@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from concierges.views import custom_confirm, custom_reset_handler, custom_reset_handler_submit
+from .views import custom_confirm, custom_reset_handler, custom_reset_handler_submit
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
 
