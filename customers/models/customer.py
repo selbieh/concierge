@@ -10,4 +10,6 @@ class Customer(models.Model):
     name = models.CharField(max_length=150, null=False, blank=False)
     logo = models.ImageField(_("avatar"), null=True, upload_to=upload_logo)
 
+    def __str__(self):
+        return self.name
 

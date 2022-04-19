@@ -35,6 +35,7 @@ urlpatterns = [
     path('user/', include("users.urls")),
     path('customers/', include('customers.urls')),
     path('services/', include('services.urls')),
+    path('', include('service_requests.urls')),
     path('docs/', schema_view)
     # url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),

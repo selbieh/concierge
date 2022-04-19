@@ -20,6 +20,10 @@ class Service(models.Model):
     image = models.ImageField(_("image"), null=True, upload_to=upload_service_image)
     price = models.FloatField()
     category = models.ForeignKey("customers.Category", on_delete=models.CASCADE, related_name="category_services")
+    integration_rout=models.CharField(blank=True,null=True,max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class HomeBanner(models.Model):

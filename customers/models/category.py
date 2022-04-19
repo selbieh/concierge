@@ -10,3 +10,6 @@ class Category(models.Model):
     title = models.CharField(max_length=150, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     image = models.ImageField(_("image"), null=True, upload_to=upload_image)
+
+    def __str__(self):
+        return self.title

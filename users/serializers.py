@@ -64,7 +64,7 @@ class ReadUserDataSerializer(serializers.Serializer):
     avatar = serializers.FileField()
     full_name = serializers.CharField()
     email = serializers.EmailField()
-    invitation_code = serializers.CharField(source="invitation_code.code")
+    invitation_code = serializers.CharField(source="invitation_code.code",default=None)
     customer = CustomerSerializer(many=False)
 
 
