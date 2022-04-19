@@ -13,6 +13,8 @@ import environ
 import os
 
 from pathlib import Path
+from firebase_admin import initialize_app
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,6 +54,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'rest_framework_swagger',
     'modeltranslation',
+    'import_export',
+    "fcm",
     # installed app
     'users',
     'customers',
@@ -197,3 +201,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+
+
+
+#FCM
+FCM_APIKEY=env.str('FCM_APIKEY',"")

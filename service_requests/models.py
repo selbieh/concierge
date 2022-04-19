@@ -3,38 +3,38 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class ServiceRequest(models.Model):
-    #payment status
-    INITIATED='initiated'
-    PAID='paid'
-    NOT_REQUIRED='not required'
-    #order status
-    CREATED='created'
-    IN_PROCESS='in process'
-    CANCELED_BY_USER='canceled'
-    DONE='DONE'
-    #payment methods
-    CASH='cash'
-    CARD='card'
+    # payment status
+    INITIATED = 'initiated'
+    PAID = 'paid'
+    NOT_REQUIRED = 'not required'
+    # order status
+    CREATED = 'created'
+    IN_PROCESS = 'in process'
+    CANCELED_BY_USER = 'canceled'
+    DONE = 'DONE'
+    # payment methods
+    CASH = 'cash'
+    CARD = 'card'
 
-    payment_status_choices=[
-        (INITIATED,INITIATED),
-        (PAID,PAID),
-        (NOT_REQUIRED,NOT_REQUIRED),
+    payment_status_choices = [
+        (INITIATED, INITIATED),
+        (PAID, PAID),
+        (NOT_REQUIRED, NOT_REQUIRED),
     ]
-    status_choices=[
-        (CREATED,CREATED),
-        (IN_PROCESS,CREATED),
-        (CANCELED_BY_USER,CANCELED_BY_USER),
-        (DONE,DONE),
+    status_choices = [
+        (CREATED, CREATED),
+        (IN_PROCESS, CREATED),
+        (CANCELED_BY_USER, CANCELED_BY_USER),
+        (DONE, DONE),
     ]
-    payment_methods_choices=[
-        (CASH,CASH),
-        (CARD,CARD)
+    payment_methods_choices = [
+        (CASH, CASH),
+        (CARD, CARD)
     ]
 
-    status = models.CharField(blank=False, null=False, max_length=25,choices=status_choices)
-    payment_status = models.CharField(blank=True, null=True, max_length=25,choices=payment_status_choices)
-    payment_method = models.CharField(blank=False, null=False, max_length=25,choices=payment_methods_choices)
+    status = models.CharField(blank=False, null=False, max_length=25, choices=status_choices)
+    payment_status = models.CharField(blank=True, null=True, max_length=25, choices=payment_status_choices)
+    payment_method = models.CharField(blank=False, null=False, max_length=25, choices=payment_methods_choices)
     service = models.ForeignKey('services.Service', blank=False, null=False, on_delete=models.CASCADE,
                                 related_name='service_requests')
     user = models.ForeignKey('users.User', blank=False, null=False, on_delete=models.CASCADE,
@@ -71,10 +71,9 @@ class ServiceRequest(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
         new = not bool(self.pk)
-        if new and self.payment_method==self.CASH:
-            self.payment_status=self.NOT_REQUIRED
+        if new and self.payment_method == self.CASH:
+            self.payment_status = self.NOT_REQUIRED
 
         super(ServiceRequest, self).save(force_insert=False, force_update=False, using=None,
-             update_fields=None)
+                                         update_fields=None)
