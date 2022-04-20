@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
+
 
 
 class ServiceRequest(models.Model):
@@ -9,9 +12,11 @@ class ServiceRequest(models.Model):
     NOT_REQUIRED = 'not required'
     # order status
     CREATED = 'created'
+    WAITING_PAYMENT = 'waiting payment'
     IN_PROCESS = 'in process'
     CANCELED_BY_USER = 'canceled'
-    DONE = 'DONE'
+    WAITING_PRICING = 'waiting pricing'
+    DONE = 'done'
     # payment methods
     CASH = 'cash'
     CARD = 'card'
@@ -23,7 +28,9 @@ class ServiceRequest(models.Model):
     ]
     status_choices = [
         (CREATED, CREATED),
-        (IN_PROCESS, CREATED),
+        (CREATED, CREATED),
+        (WAITING_PAYMENT, WAITING_PAYMENT),
+        (IN_PROCESS, IN_PROCESS),
         (CANCELED_BY_USER, CANCELED_BY_USER),
         (DONE, DONE),
     ]
@@ -74,6 +81,27 @@ class ServiceRequest(models.Model):
         new = not bool(self.pk)
         if new and self.payment_method == self.CASH:
             self.payment_status = self.NOT_REQUIRED
-
+        if not self.price and self.service.price:
+            self.price = self.service.price
+        if not self.price and not self.service.price:
+            self.status = self.WAITING_PRICING
+        if self.price and self.payment_status == self.NOT_REQUIRED:
+            self.status = self.CREATED
         super(ServiceRequest, self).save(force_insert=False, force_update=False, using=None,
                                          update_fields=None)
+
+
+@receiver(post_save, sender=ServiceRequest)
+def my_handler(sender, **kwargs):
+    old_object = ServiceRequest.objects.get(pk=kwargs['instance'].pk)
+    old_status = old_object.status
+    new_object = kwargs['instance']
+    new_status = new_object.status
+    from notifications.models import RequestNotificationSettings
+    notification=RequestNotificationSettings.objects.filter(previous_status=old_status,new_status=new_status)
+    if notification:
+        notification=notification.first()
+        from fcm.utils import get_device_model
+        Device = get_device_model()
+        print(Device)
+        Device.objects.filter(user=new_object.user).send_message({'message': notification.message})

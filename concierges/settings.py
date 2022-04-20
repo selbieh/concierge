@@ -190,6 +190,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
     ),
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated',
+        ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     'PAGE_SIZE': 10,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
@@ -206,3 +209,4 @@ EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
 #FCM
 FCM_APIKEY=env.str('FCM_APIKEY',"")
+FCM_DEVICE_MODEL = 'notifications.MyDevice'
