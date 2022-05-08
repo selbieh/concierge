@@ -1,6 +1,10 @@
 from rest_framework import viewsets
 from .models import MyDevice
-from .serializers import DeviceSerializer
+from .serializers import DeviceSerializer, UserSavedNotificationsReadSerializer, UserSavedNotificationsUpdateSerializer
+from .models import UserSavedNotifications
+from rest_framework.mixins import ListModelMixin, UpdateModelMixin
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import IsAuthenticated
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
@@ -8,6 +12,14 @@ class DeviceViewSet(viewsets.ModelViewSet):
     serializer_class = DeviceSerializer
 
 
-from django.shortcuts import render
+class UserSavedNotificationsViewSet(GenericViewSet, ListModelMixin, UpdateModelMixin):
+    permission_classes = [IsAuthenticated]
 
-# Create your views here.
+    def get_queryset(self):
+        return UserSavedNotifications.objects.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.request.method.lower() == 'get':
+            return UserSavedNotificationsReadSerializer
+        else:
+            return UserSavedNotificationsUpdateSerializer

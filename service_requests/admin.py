@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from notifications.models import UserSavedNotifications
 from .models import ServiceRequest
 
 class ServiceRequestAdmin(admin.ModelAdmin):
@@ -8,3 +10,4 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ServiceRequest,ServiceRequestAdmin)
+admin.site.register(UserSavedNotifications)
