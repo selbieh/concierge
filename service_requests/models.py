@@ -28,7 +28,6 @@ class ServiceRequest(models.Model):
     ]
     status_choices = [
         (CREATED, CREATED),
-        (CREATED, CREATED),
         (WAITING_PAYMENT, WAITING_PAYMENT),
         (IN_PROCESS, IN_PROCESS),
         (CANCELED_BY_USER, CANCELED_BY_USER),

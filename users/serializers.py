@@ -1,14 +1,10 @@
-from allauth.account import adapter
-from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
+from customers.models import InvitationCode
+from customers.serializers import CustomerSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from phonenumber_field.serializerfields import PhoneNumberField
-from rest_framework.validators import UniqueValidator
 from rest_framework import serializers
-from customers.models import InvitationCode
-from django.core.exceptions import ValidationError as DjangoValidationError
-
-from customers.serializers import CustomerSerializer
+from rest_framework.validators import UniqueValidator
 from users.models import User
 
 
@@ -64,7 +60,7 @@ class ReadUserDataSerializer(serializers.Serializer):
     avatar = serializers.FileField()
     full_name = serializers.CharField()
     email = serializers.EmailField()
-    invitation_code = serializers.CharField(source="invitation_code.code",default=None)
+    invitation_code = serializers.CharField(source="invitation_code.code", default=None)
     customer = CustomerSerializer(many=False)
 
 
