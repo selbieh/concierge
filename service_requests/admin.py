@@ -9,7 +9,7 @@ from .models import ServiceRequest
 
 class CustomerFilter(admin.SimpleListFilter):
     title = 'Customer filter'
-    parameter_name = 'cutsomer'
+    parameter_name = 'customer'
 
     def lookups(self, request, model_admin):
         return [(c.id,c.name) for c in Customer.objects.all() ]
@@ -21,7 +21,7 @@ class CustomerFilter(admin.SimpleListFilter):
         return queryset
 
 
-class ServiceRequestAdmin(ExportMixin,admin.ModelAdmin):
+class ServiceRequestAdmin(admin.ModelAdmin):
     list_display = ['id','service','user','status']
     autocomplete_fields = ['user','service']
     search_fields = ['mobile']
