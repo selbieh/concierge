@@ -1,9 +1,17 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
 
 
+
+
+status_map={
+    #[new or old,  status , paymen_method ,payment_status ,price]--->[status,payment_status]
+    (True,'created','cash'):('created','not required'),
+    (True,'created','card'):('waiting payment',None)
+}
 
 class ServiceRequest(models.Model):
     # payment status
@@ -37,7 +45,8 @@ class ServiceRequest(models.Model):
         (CASH, CASH),
         (CARD, CARD)
     ]
-
+    payment_unique_ident=models.CharField(max_length=125,blank=True,null=True)
+    payment_unique_ident_history=ArrayField(models.CharField(max_length=125), blank=True,null=True)
     status = models.CharField(blank=False, null=False, max_length=25, choices=status_choices)
     payment_status = models.CharField(blank=True, null=True, max_length=25, choices=payment_status_choices)
     payment_method = models.CharField(blank=False, null=False, max_length=25, choices=payment_methods_choices)
@@ -78,16 +87,25 @@ class ServiceRequest(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         new = not bool(self.pk)
-        if new and self.payment_method == self.CASH:
-            self.payment_status = self.NOT_REQUIRED
+        if status_map.get((new,self.status,self.payment_method)):
+            self.status,self.payment_status=status_map.get((new,self.status,self.payment_method))
         if not self.price and self.service.price:
             self.price = self.service.price
         if not self.price and not self.service.price:
             self.status = self.WAITING_PRICING
-        if self.price and self.payment_status == self.NOT_REQUIRED:
-            self.status = self.CREATED
         super(ServiceRequest, self).save(force_insert=False, force_update=False, using=None,
-                                         update_fields=None)
+                                          update_fields=None)
+                                # if new and self.payment_method == self.CASH and self.status==self.CREATED:
+                                #     self.payment_status = self.NOT_REQUIRED
+
+
+                                # if self.price and self.payment_status == self.NOT_REQUIRED:
+                                #     self.status = self.CREATED
+                                # if self.payment_method == self.CARD:
+                                #     print(self.payment_status)
+                                #     self.payment_status=self.WAITING_PAYMENT
+                                #     print(self.payment_status)
+
 
 
 @receiver(post_save, sender=ServiceRequest)

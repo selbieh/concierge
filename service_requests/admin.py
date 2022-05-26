@@ -26,6 +26,7 @@ class ServiceRequestAdmin(ExportMixin,admin.ModelAdmin):
     autocomplete_fields = ['user','service']
     search_fields = ['mobile']
     list_filter = ['status','payment_status','payment_method',CustomerFilter]
+    readonly_fields = ['payment_unique_ident_history','payment_unique_ident','payment_status']
 
 
 admin.site.register(ServiceRequest,ServiceRequestAdmin)

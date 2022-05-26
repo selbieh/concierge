@@ -38,6 +38,7 @@ urlpatterns = [
     path('', include('service_requests.urls')),
     path('docs/', schema_view),
     path('fcm/', include('notifications.urls')),
+    path('payment/', include('payment.urls')),
     # url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
 

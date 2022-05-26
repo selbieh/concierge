@@ -62,7 +62,8 @@ INSTALLED_APPS = [
     'services',
     'reservation',
     'service_requests',
-    'notifications'
+    'notifications',
+    'payment'
 
 ]
 
@@ -105,12 +106,17 @@ WSGI_APPLICATION = 'concierges.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if env.db("DJANGO_DATABASE_URL"):
+    DATABASES = {
+        'default': env.db("DJANGO_DATABASE_URL"),
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -210,3 +216,8 @@ EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 #FCM
 FCM_APIKEY=env.str('FCM_APIKEY',"")
 FCM_DEVICE_MODEL = 'notifications.MyDevice'
+
+
+PAYMENT_URL=env.str('PAYMENT_URL')
+PAYMENT_PUBLIC_KEY=env.str('PAYMENT_PUBLIC_KEY')
+PAYMENT_MERCHANT_ID=env.str('PAYMENT_MERCHANT_ID')
