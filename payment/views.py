@@ -74,5 +74,4 @@ class PayOrder(RetrieveAPIView):
         header = {"Authorization":f"Bearer {settings.PAYMENT_PUBLIC_KEY}","MerchantId":f"{settings.PAYMENT_MERCHANT_ID}"}
         response=requests.post(settings.PAYMENT_URL,json=payload,headers=header)
         PayOrderResponseLog.objects.create(opay_response=response.json(),order=service_order)
-
         return Response(response.json())
