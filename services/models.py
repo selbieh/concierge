@@ -18,7 +18,7 @@ class Service(models.Model):
     name = models.CharField(max_length=150, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
     image = models.ImageField(_("image"), null=True, upload_to=upload_service_image)
-    price = models.FloatField()
+    price = models.FloatField(null=True,blank=True)
     category = models.ForeignKey("customers.Category", on_delete=models.CASCADE, related_name="category_services")
     integration_rout=models.CharField(blank=True,null=True,max_length=255)
 
