@@ -4,6 +4,7 @@ import uuid
 import pr as pr
 from django.conf import settings
 import requests
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.generics import RetrieveAPIView
@@ -31,7 +32,7 @@ def prepare_payment_json(service_order: ServiceRequest) -> dict:
             "total": 400,
             "currency": "EGP"
         },
-        "returnUrl": "https://your-return-url",
+        "returnUrl": f"{settings.OPAY_REDIRECT_URL}",
         "callbackUrl": f"{settings.OPAY_CALLBACK_URL}",
         "cancelUrl": f"{settings.SERVER_DOMAIN}/payment/call-back/",
         "expireAt": 300,
@@ -120,3 +121,8 @@ class OPayCallBack(APIView):
             payment_log_obj.false_ip_callback=True
             payment_log_obj.save()
             return Response("invalid ip")
+
+
+def opay_redirect_url(request):
+    print(vars(request))
+    return HttpResponse("payment placed and we will inform you with th payment status")
