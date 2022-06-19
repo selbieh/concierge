@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from users.models import User
 from .models import ServiceRequest
+from services.serializers import ListServicesSerializer
 
 
 class ServiceRequestSerializer(serializers.ModelSerializer):
@@ -14,6 +15,13 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
     payment_status = serializers.CharField( allow_null=True, allow_blank=True, read_only=True)
 
 
+    class Meta:
+        fields = '__all__'
+        model = ServiceRequest
+
+
+class ServiceRequestReadSerializer(serializers.ModelSerializer):
+    service=ListServicesSerializer()
     class Meta:
         fields = '__all__'
         model = ServiceRequest
