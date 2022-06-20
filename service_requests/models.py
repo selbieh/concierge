@@ -4,9 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from openpyxl.styles.builtins import total
 from phonenumber_field.modelfields import PhoneNumberField
-
-
-
+from pyasn1.compat.octets import null
 
 status_map={
     #[new or old,  status , paymen_method ,payment_status ,price]--->[status,payment_status]
@@ -136,3 +134,4 @@ class GifteryCallback(models.Model):
     product_list=ArrayField(models.JSONField(default=dict),blank=False,null=False)
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    giftry_order_id=models.CharField(max_length=125,blank=False,null=False)
