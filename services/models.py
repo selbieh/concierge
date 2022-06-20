@@ -21,6 +21,7 @@ class Service(models.Model):
     price = models.FloatField(null=True,blank=True)
     category = models.ForeignKey("customers.Category", on_delete=models.CASCADE, related_name="category_services")
     integration_rout=models.CharField(blank=True,null=True,max_length=255)
+    duration = models.PositiveIntegerField(blank=True,null=True,default=0)
 
     def __str__(self):
         return self.name

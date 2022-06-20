@@ -3,8 +3,7 @@ from import_export.admin import ExportMixin
 
 from customers.models import Customer
 from notifications.models import UserSavedNotifications
-from .models import ServiceRequest
-
+from .models import ServiceRequest, GifteryCallback
 
 
 class CustomerFilter(admin.SimpleListFilter):
@@ -31,3 +30,4 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
 admin.site.register(ServiceRequest,ServiceRequestAdmin)
 admin.site.register(UserSavedNotifications)
+admin.site.register(GifteryCallback)

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from users.models import User
-from .models import ServiceRequest
+from .models import ServiceRequest, GifteryCallback
 from services.serializers import ListServicesSerializer
 
 
@@ -25,3 +25,10 @@ class ServiceRequestReadSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = ServiceRequest
+
+
+
+class GifteryCallbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model=GifteryCallback

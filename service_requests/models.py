@@ -2,6 +2,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from openpyxl.styles.builtins import total
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -76,10 +77,13 @@ class ServiceRequest(models.Model):
     flying_to = models.CharField(blank=True, null=True, max_length=125)
     departure_date = models.DateField(null=True, blank=True)
     returning_date = models.DateField(null=True, blank=True)
-    number_of_adult_passengers = models.IntegerField(null=True, blank=True)
-    number_of_children_passengers = models.IntegerField(null=True, blank=True)
+    # number_of_adult_passengers = models.IntegerField(null=True, blank=True)
+    # number_of_children_passengers = models.IntegerField(null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    doctor_name = models.CharField(max_length=125,null=True,blank=True)
+    hospital_or_clinic_address =models.CharField(max_length=255,blank=True,null=True)
 
     def __str__(self):
         return f'{self.user.full_name}---->{self.service.name}'
@@ -123,3 +127,12 @@ def my_handler(sender, **kwargs):
         Device = get_device_model()
         Device.objects.filter(user=new_object.user).send_message({'message': notification.message})
         UserSavedNotifications.objects.create(user=new_object.user,message=notification.message,redirect_obj=new_object.id,setting_id=notification.id)
+
+
+
+class GifteryCallback(models.Model):
+    user = models.ForeignKey('users.User',blank=False,null=False,on_delete=models.PROTECT)
+    total_price = models.FloatField()
+    product_list=ArrayField(models.JSONField(default=dict),blank=False,null=False)
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
