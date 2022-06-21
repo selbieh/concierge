@@ -1,3 +1,4 @@
+api==0.0.7
 asgiref==3.5.0
 CacheControl==0.12.10
 cachetools==5.0.0
@@ -8,6 +9,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 cryptography==36.0.1
 defusedxml==0.7.1
+details==0.2.0
 diff-match-patch==20200713
 dj-rest-auth==2.2.3
 Django==3.2
@@ -36,6 +38,7 @@ google-resumable-media==2.3.2
 googleapis-common-protos==1.56.0
 grpcio==1.44.0
 grpcio-status==1.44.0
+hospital==0.9
 httplib2==0.20.4
 idna==3.3
 importlib-metadata==4.11.3
@@ -45,14 +48,17 @@ Markdown==3.3.6
 MarkupPy==1.14
 MarkupSafe==2.1.1
 msgpack==1.0.3
+nose==1.3.7
 oauthlib==3.2.0
 odfpy==1.4.1
 openapi-codec==1.3.2
 openpyxl==3.0.9
 phonenumbers==8.12.45
 Pillow==9.0.1
+pr==0.6.0
 proto-plus==1.20.3
 protobuf==3.20.0
+psycopg2==2.9.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
