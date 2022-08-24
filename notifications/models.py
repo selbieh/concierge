@@ -24,11 +24,11 @@ class BulkPushNotifications(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        super(BulkPushNotifications, self).save(force_insert=False, force_update=False, using=None,
-                                                update_fields=None)
         from fcm.utils import get_device_model
         Device = get_device_model()
-        Device.objects.all().send_message({'message': self.message,"title":"hi"})
+        Device.objects.all().send_message({'message': self.message, "title": "hi"})
+        super(BulkPushNotifications, self).save(force_insert=False, force_update=False, using=None,
+                                                update_fields=None)
 
 
 class UserSavedNotifications(models.Model):
