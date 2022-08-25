@@ -237,7 +237,7 @@ FCM_DJANGO_SETTINGS = {
     "APP_VERBOSE_NAME": "FCM Django",
      # true if you want to have only one active device per registered user at a time
      # default: False
-    "ONE_DEVICE_PER_USER": True,
+    "ONE_DEVICE_PER_USER": False,
      # devices to which notifications cannot be sent,
      # are deleted upon receiving error response from FCM
      # default: False
