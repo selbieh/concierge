@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from fcm.models import AbstractDevice
+# from fcm.models import AbstractDevice
 
 from service_requests.models import ServiceRequest
 
@@ -9,9 +9,9 @@ def upload_icon(instance, filename):
     return "notification/icon/{0}".format(instance.id)
 
 
-class MyDevice(AbstractDevice):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
+# class MyDevice(AbstractDevice):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+#
 
 class BulkPushNotifications(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
@@ -24,9 +24,16 @@ class BulkPushNotifications(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        from fcm.utils import get_device_model
-        Device = get_device_model()
-        Device.objects.all().send_message({'message': self.message, "title": "hi"})
+        from firebase_admin.messaging import Message, Notification
+        from fcm_django.models import FCMDevice
+
+        message=Message(
+            notification=Notification(title="", body=self.message, image="")
+            #topic="notification",
+        )
+        device = FCMDevice.objects.all()
+        device.send_message(message)
+
         super(BulkPushNotifications, self).save(force_insert=False, force_update=False, using=None,
                                                 update_fields=None)
 

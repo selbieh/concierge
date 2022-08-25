@@ -1,15 +1,10 @@
 from rest_framework import viewsets
-from .models import MyDevice
-from .serializers import DeviceSerializer, UserSavedNotificationsReadSerializer, UserSavedNotificationsUpdateSerializer
+from .serializers import  UserSavedNotificationsReadSerializer, UserSavedNotificationsUpdateSerializer
 from .models import UserSavedNotifications
 from rest_framework.mixins import ListModelMixin, UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
 
-
-class DeviceViewSet(viewsets.ModelViewSet):
-    queryset = MyDevice.objects.all()
-    serializer_class = DeviceSerializer
 
 
 class UserSavedNotificationsViewSet(GenericViewSet, ListModelMixin, UpdateModelMixin):

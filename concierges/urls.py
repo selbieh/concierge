@@ -18,6 +18,7 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
 
 from .views import custom_confirm, custom_reset_handler, custom_reset_handler_submit
 from django.conf.urls import url
@@ -37,8 +38,9 @@ urlpatterns = [
     path('services/', include('services.urls')),
     path('', include('service_requests.urls')),
     path('docs/', schema_view),
-    path('fcm/', include('notifications.urls')),
     path('payment/', include('payment.urls')),
+    path('devices', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
+
     # url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
 

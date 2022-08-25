@@ -121,10 +121,10 @@ def my_handler(sender, **kwargs):
     notification=RequestNotificationSettings.objects.filter(previous_status=old_status,new_status=new_status)
     if notification:
         notification=notification.first()
-        from fcm.utils import get_device_model
-        Device = get_device_model()
-        Device.objects.filter(user=new_object.user).send_message({'message': notification.message})
-        UserSavedNotifications.objects.create(user=new_object.user,message=notification.message,redirect_obj=new_object.id,setting_id=notification.id)
+        # from fcm.utils import get_device_model
+        # Device = get_device_model()
+        # Device.objects.filter(user=new_object.user).send_message({'message': notification.message})
+        # UserSavedNotifications.objects.create(user=new_object.user,message=notification.message,redirect_obj=new_object.id,setting_id=notification.id)
 
 
 

@@ -1,2 +1,3 @@
 /concierges/.env
 /db.sqlite3
+/concierges/google.json
