@@ -21,7 +21,8 @@ from firebase_admin import initialize_app
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-env.read_env()
+env.read_env(GOOGLE_APPLICATION_CREDENTIALS= str(os.path.join(BASE_DIR, 'concierges','google.json'))
+)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -248,4 +249,4 @@ FCM_DJANGO_SETTINGS = {
     "UPDATE_ON_DUPLICATE_REG_ID": True,
 }
 FCM_MAX_RECIPIENTS=10000
-GOOGLE_APPLICATION_CREDENTIALS=os.path.join(BASE_DIR, 'google.json')
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] =
