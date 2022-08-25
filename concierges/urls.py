@@ -37,9 +37,10 @@ urlpatterns = [
     path('customers/', include('customers.urls')),
     path('services/', include('services.urls')),
     path('', include('service_requests.urls')),
+    path('notifications/', include('notifications.urls')),
     path('docs/', schema_view),
     path('payment/', include('payment.urls')),
-    path('devices', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
+    path('devices/', FCMDeviceAuthorizedViewSet.as_view({'post': 'create'}), name='create_fcm_device'),
 
     # url(r'^account/', include('allauth.urls')),
     # path('dj-rest-auth/registration/account-confirm-email/<str:key>/', custom_confirm),
