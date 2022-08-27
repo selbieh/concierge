@@ -16,10 +16,9 @@ class ServiceRequestViewSets(GenericViewSet, CreateModelMixin, ListModelMixin, R
     serializer_class = ServiceRequestSerializer
     filterset_class = ServiceRequestFilter
     filter_backends = [DjangoFilterBackend]
-    permission_classes = []
 
     def get_queryset(self):
-        return ServiceRequest.objects.all()#.filter(user=self.request.user)
+        return ServiceRequest.objects.filter(user=self.request.user)
 
 
     def get_serializer_class(self):
