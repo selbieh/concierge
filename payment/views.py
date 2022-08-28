@@ -29,7 +29,7 @@ def prepare_payment_json(service_order: ServiceRequest) -> dict:
         "country": "EG",
         "reference": service_order.payment_unique_ident,
         "amount": {
-            "total": service_order.price
+            "total": service_order.price,
             "currency": "EGP"
         },
         "returnUrl": f"{settings.OPAY_REDIRECT_URL}",
