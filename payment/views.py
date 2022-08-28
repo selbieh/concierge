@@ -24,7 +24,6 @@ def prepare_payment_json(service_order: ServiceRequest) -> dict:
     old_ident_list.append(new_identifier)
     service_order.payment_unique_ident_history=old_ident_list
     service_order.save()
-    print(settings.OPAY_CALLBACK_URL)
     return {
         "country": "EG",
         "reference": service_order.payment_unique_ident,
