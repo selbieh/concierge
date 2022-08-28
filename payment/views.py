@@ -29,7 +29,7 @@ def prepare_payment_json(service_order: ServiceRequest) -> dict:
         "country": "EG",
         "reference": service_order.payment_unique_ident,
         "amount": {
-            "total": 400,
+            "total": service_order.price
             "currency": "EGP"
         },
         "returnUrl": f"{settings.OPAY_REDIRECT_URL}",
@@ -44,11 +44,11 @@ def prepare_payment_json(service_order: ServiceRequest) -> dict:
         },
         "productList": [
             {
-                "productId": "productId",
-                "name": "name",
-                "description": "description",
-                "price": 100,
-                "quantity": 2,
+                "productId": service_order.service.id if service_order.service else '',
+                "name": service_order.service.name if service_order.service else '',
+                "description": service_order.service.description if service_order.service else '',
+                "price": service_order.price,
+                "quantity": 1,
                 "imageUrl": f"{service_order.service.image.url or ''}"
             }
         ],
