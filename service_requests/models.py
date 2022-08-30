@@ -12,6 +12,10 @@ status_map={
     (True,'created','card'):('waiting payment',None)
 }
 
+
+def upload_image(instance, filename):
+    return "service_request/{0}/{1}".format(instance.id, filename)
+
 class ServiceRequest(models.Model):
     # payment status
     INITIATED = 'initiated'
@@ -58,6 +62,7 @@ class ServiceRequest(models.Model):
     operation_notes = models.TextField(blank=True, null=True)
     full_requester_name = models.CharField(max_length=255, blank=False, null=False)
     requester_mobile = PhoneNumberField(blank=False, null=False)
+    document_file=models.FileField(upload_to=upload_image,blank=True,null=True)
     # errands service
     pick_up_location = models.JSONField(default=dict, null=True, blank=True)
     drop_off_location = models.JSONField(default=dict, null=True, blank=True)
