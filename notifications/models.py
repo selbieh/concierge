@@ -18,6 +18,7 @@ class BulkPushNotifications(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
     message = models.CharField(max_length=125, blank=False, null=False)
     redirect_to=models.CharField(max_length=25,blank=True,null=True)
+    customer=models.ForeignKey('customers.Customer',on_delete=models.SET_NULL,blank=True,null=True)
 
     def __str__(self):
         return self.message
@@ -26,12 +27,14 @@ class BulkPushNotifications(models.Model):
              update_fields=None):
         from firebase_admin.messaging import Message, Notification
         from fcm_django.models import FCMDevice
-
-        message=Message(
+        message = Message(
             notification=Notification(title="", body=self.message, image="")
-            #topic="notification",
+            # topic="notification",
         )
-        device = FCMDevice.objects.all()
+        if self.customer:
+            device = FCMDevice.objects.filter(user__in=self.customer.user_set.all())
+        else:
+            device = FCMDevice.objects.all()
         device.send_message(message)
 
         super(BulkPushNotifications, self).save(force_insert=False, force_update=False, using=None,

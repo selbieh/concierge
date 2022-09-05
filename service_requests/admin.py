@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ExportMixin
 
-from customers.models import Customer
+from customers.models import Customer, StaffAssignedCustomersRequests
 from notifications.models import UserSavedNotifications
 from .models import ServiceRequest, GifteryCallback
 
@@ -23,9 +23,18 @@ class CustomerFilter(admin.SimpleListFilter):
 class ServiceRequestAdmin(admin.ModelAdmin):
     list_display = ['id','service','user','status']
     autocomplete_fields = ['user','service']
-    search_fields = ['mobile']
+    search_fields = ['requester_mobile']
     list_filter = ['status','payment_status','payment_method',CustomerFilter]
     readonly_fields = ['payment_unique_ident_history','payment_unique_ident','payment_status']
+
+    def get_queryset(self, request):
+        qs=super(ServiceRequestAdmin, self).get_queryset(request)
+        user = request.user
+        assigned=StaffAssignedCustomersRequests.objects.filter(user=user).first()
+        if assigned :
+            return qs.filter(user__customer__in=assigned.customers.all())
+        return qs.none()
+
 
 
 admin.site.register(ServiceRequest,ServiceRequestAdmin)
