@@ -1,4 +1,6 @@
 from modeltranslation.translator import register, TranslationOptions
+
+from customers.models import Category
 from .models import Service , HomeBanner ,HomePromotion ,Prerequisite
 
 @register(HomeBanner)
@@ -17,3 +19,8 @@ class HomePromotionTranslation(TranslationOptions):
 @register(Prerequisite)
 class PrerequisiteTranslation(TranslationOptions):
     fields=('name',)
+
+
+@register(Category)
+class PrerequisiteTranslation(TranslationOptions):
+    fields=('title','description')
