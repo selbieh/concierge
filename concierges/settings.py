@@ -77,6 +77,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
+
 ]
 
 ROOT_URLCONF = 'concierges.urls'
@@ -150,7 +152,7 @@ LANGUAGES = (
 )
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
-MODELTRANSLATION_LANGUAGES = ('en', 'ar')
+#MODELTRANSLATION_LANGUAGES = ('en', 'ar')
 
 MODELTRANSLATION_FALLBACK_LANGUAGES = ('en', 'ar')
 
