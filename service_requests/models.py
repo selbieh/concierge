@@ -99,7 +99,7 @@ class ServiceRequest(models.Model):
             self.status,self.payment_status=status_map.get((new,self.status,self.payment_method))
         if not self.price and self.service.price:
             self.price = self.service.price
-        if not self.price and not self.service.price:
+        if not self.price and not self.service.price and not self.status:
             self.status = self.WAITING_PRICING
         super(ServiceRequest, self).save(force_insert=False, force_update=False, using=None,
                                           update_fields=None)
