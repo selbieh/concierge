@@ -43,6 +43,7 @@ class ServiceRequest(models.Model):
         (IN_PROCESS, IN_PROCESS),
         (CANCELED_BY_USER, CANCELED_BY_USER),
         (DONE, DONE),
+        (WAITING_PRICING,WAITING_PRICING)
     ]
     payment_methods_choices = [
         (CASH, CASH),
