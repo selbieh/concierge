@@ -85,27 +85,10 @@ class PayOrder(RetrieveAPIView):
 class OPayCallBack(APIView):
     permission_classes = []
 
-    ip_list =[
-        "8.208.96.96",
-        "8.208.100.207",
-        "8.208.98.84",
-        "8.208.21.57",
-        "156.200.119.218",
-        "156.200.119.219",
-        "156.200.119.220",
-        "156.200.119.221",
-        "156.200.119.222",
-        "196.204.229.162",
-        "196.204.229.163",
-        "196.204.229.164",
-        "196.204.229.165",
-        "196.204.229.166"
-    ]
-
     def post(self,request):
         reference = request.data['payload']['reference']
 
-        if request.META.get("REMOTE_ADDR") in self.ip_list:
+        if request.META['HTTP_HOST'] == "api.opaycheckout.com" :
             payment_log_obj=get_object_or_404(PayOrderResponseLog,reference=reference)
             payment_log_obj.callback=request.data
             payment_log_obj.save()
