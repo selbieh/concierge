@@ -45,6 +45,7 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2', 'full_name', 'mobile', 'dob', 'avatar', 'is_active','groups', 'user_permissions','is_staff', 'is_superuser')}
         ),
     )
-    search_fields=['id']
+    search_fields=['id','email','mobile']
+    list_display=['id','email','mobile','is_staff']
 admin.site.register(User, CustomUserAdmin)
     # other admin options...
