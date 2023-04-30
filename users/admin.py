@@ -12,14 +12,13 @@ class UserCreationModelForm(UserCreationForm):
     dob = forms.DateField(required=False, widget=forms.TextInput(attrs={'type': 'date'}))
     avatar = forms.FileField(required=False)
     is_active = forms.BooleanField(required=False)
-    invitation_code = forms.ModelChoiceField(queryset=InvitationCode.objects.all(), required=False)
     customer = forms.ModelChoiceField(queryset=Customer.objects.all(), required=False)
     groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=False)
     user_permissions = forms.ModelMultipleChoiceField(queryset=Permission.objects.all(), required=False)
 
     class Meta:
         model = User
-        fields = ('email', 'mobile', 'full_name', 'dob', 'avatar', 'password1', 'password2', 'is_active', 'invitation_code', 'customer', 'groups', 'user_permissions')
+        fields = ('email', 'mobile', 'full_name', 'dob', 'avatar', 'password1', 'password2', 'is_active',  'customer', 'groups', 'user_permissions')
 
     def save(self, commit=True):
         user = super(UserCreationModelForm, self).save(commit=False)
