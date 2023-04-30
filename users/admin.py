@@ -26,11 +26,5 @@ class UserCreationModelForm(UserCreationForm):
 
 class CustomUserAdmin(UserAdmin):
     add_form = UserCreationModelForm
-    add_fieldsets = (
-        (None, {
-            'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'full_name', 'mobile', 'dob', 'avatar')}
-        ),
-    )
-
+    
 admin.site.register(User, CustomUserAdmin)
