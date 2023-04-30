@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group, Permission
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserChangeForm
 
 class UserCreationModelForm(UserCreationForm):
     email = forms.EmailField(required=True)
