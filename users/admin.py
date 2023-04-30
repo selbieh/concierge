@@ -45,4 +45,5 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
     search_fields=['id']
+admin.site.register(User, CustomUserAdmin)
     # other admin options...
