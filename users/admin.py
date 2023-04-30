@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.hashers import make_password
 from phonenumber_field.formfields import PhoneNumberField
 from .models import User
+from django import forms
 
 class UserCreationModelForm(UserCreationForm):
     email = forms.EmailField(required=True)
