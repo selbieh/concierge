@@ -12,7 +12,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'mobile', 'full_name', 'dob', 'avatar', 'password1', 'password2')
+        fields = ( 'email', 'mobile', 'full_name', 'dob', 'avatar', 'password1', 'password2')
         
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
