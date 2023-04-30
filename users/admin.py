@@ -44,5 +44,5 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2', 'full_name', 'mobile', 'dob', 'avatar', 'is_active','groups', 'user_permissions')}
         ),
     )
-
+    search_fields=['id']
     # other admin options...
