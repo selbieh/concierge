@@ -56,7 +56,7 @@ class ServiceRequest(models.Model):
     payment_method = models.CharField(blank=False, null=False, max_length=25, choices=payment_methods_choices)
     service = models.ForeignKey('services.Service', blank=False, null=False, on_delete=models.CASCADE,
                                 related_name='service_requests')
-    user = models.ForeignKey('users.User', blank=False, null=False, on_delete=models.CASCADE,
+    user = models.ForeignKey('users.User', blank=True, null=True, on_delete=models.CASCADE,
                              related_name='user_service_requests')
     price = models.FloatField(null=True, blank=True, max_length=125)
     user_notes = models.TextField(blank=True, null=True)
