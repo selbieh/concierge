@@ -9,5 +9,5 @@ app_name = "service_requests"
 urlpatterns = [
     path('',include(router.urls)),
     path('giftry-call-back/',GifteryCallbackView.as_view()),
-    path('fill-form/', request_view, name='send-mail-form')
+    path('conceirge-form/', request_view, name='send-mail-form')
 ]
