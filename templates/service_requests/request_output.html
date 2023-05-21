@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Table with CSS</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e2e2e2;
+    }
+
+    .column1 {
+      width: 7%;
+    }
+
+    .column2 {
+      width: 5%;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th class="column1">Request Names</th>
+      <th class="column2">Request Output</th>
+    </tr>
+    <tr>
+      <td class="column1">Client Name</td>
+      <td class="column2">{{form.clientName}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Phone Number</td>
+      <td class="column2">{{form.phoneNumber}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Agent Name</td>
+      <td class="column2">{{form.AgentName}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Type of Request Details</td>
+      <td class="column2">{{form.requestDetails}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Date and Time of Request</td>
+      <td class="column2">{{form.requestDateTime}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Pickup Address</td>
+      <td class="column2">{{form.pickupAddress}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Drop-off Address</td>
+      <td class="column2">{{form.dropOffAddress}}</td>
+    </tr>
+    <tr>
+      <td class="column1">Notes</td>
+      <td class="column2">{{form.notes}}</td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>REQUEST FORM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      width: 150px;
+      height: auto;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #cab120; /* Karat Gold color */
+      color: rgba(0, 0, 0, 0.704);
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid black;
+    }
+    .submit-button {
+      text-align: center;
+    }
+    .submit-button input {
+      padding: 10px 20px;
+      background-color: rgb(20, 10, 69);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+  
+  
+</head>
+<body>
+  <div class="header">
+    <h1>REQUEST FORM</h1>
+    <img src="logo.jpg" alt="Concierge APP" class="logo">
+  </div>
+  <div class="form-container">
+    <form method="post">
+      <div class="form-group">
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName" name="clientName" required>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="AgentName">Agent Name:</label>
+        <input type="tel" id="AgentName" name="AgentName" required>
+      </div>
+        <div class="form-group">
+          <label for="requestDetails">Type of Request Details:</label>
+          <textarea id="requestDetails" name="requestDetails" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="requestDateTime">Date and Time of Request:</label>
+          <input type="datetime-local" id="requestDateTime" name="requestDateTime" required>
+        </div>
+        <div class="form-group">
+          <label for="pickupAddress">Pickup Address:</label>
+          <input type="text" id="pickupAddress" name="pickupAddress" required>
+        </div>
+        <div class="form-group">
+          <label for="dropOffAddress">Drop-off Address:</label>
+          <input type="text" id="dropOffAddress" name="dropOffAddress" required>
+        </div>
+        <div class="form-group">
+          <label for="notes">Notes:</label>
+          <textarea id="notes" name="notes"></textarea>
+        </div>
+      </div>
+      <div class="submit-button">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
